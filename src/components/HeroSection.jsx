@@ -119,30 +119,30 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Mini category preview */}
-              <div className="grid grid-cols-3 gap-2">
+              {/* Freshman preparation card */}
+              <div className="space-y-3">
                 {[
-                  { icon: '📋', label: '新生必读', color: 'bg-lime' },
-                  { icon: '🏠', label: '生活指南', color: 'bg-black text-lime' },
-                  { icon: '📚', label: '学习资源', color: 'bg-lime' },
-                  { icon: '🏗️', label: '实训设施', color: 'bg-blue-accent text-white' },
-                  { icon: '📍', label: '周边服务', color: 'bg-black text-lime' },
-                  { icon: '🚀', label: '就业发展', color: 'bg-lime' },
-                ].map((cat) => (
-                  <div key={cat.label} className={`border-2 border-black p-3 flex flex-col items-center gap-1 ${cat.color}`}>
-                    <span className="text-xl">{cat.icon}</span>
-                    <span className="text-[10px] font-bold">{cat.label}</span>
+                  { step: '01', title: '报到前', text: '整理录取通知书、身份证、档案、照片和常用生活用品。' },
+                  { step: '02', title: '到校当天', text: '跟随志愿者引导，完成学院报到、资格初审和注册审核。' },
+                  { step: '03', title: '入住之后', text: '先熟悉宿舍楼、食堂、浴室、快递点和教学楼位置。' },
+                ].map((item) => (
+                  <div key={item.step} className="grid grid-cols-[52px_1fr] gap-3 border-3 border-black bg-off-white p-3 shadow-brutal-sm">
+                    <div className="flex h-12 w-12 items-center justify-center border-3 border-black bg-lime text-sm font-black text-black">
+                      {item.step}
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-black text-black">{item.title}</h4>
+                      <p className="mt-1 text-xs font-bold leading-relaxed text-black/55">{item.text}</p>
+                    </div>
                   </div>
                 ))}
               </div>
 
-              {/* Placeholder for photo */}
-              <div className="mt-6 border-3 border-black bg-off-white h-40 flex items-center justify-center">
-                <div className="text-center">
-                  <p className="text-3xl mb-2">📸</p>
-                  <p className="text-xs font-bold text-gray-400">校园实景照片</p>
-                  <p className="text-[10px] text-gray-300 mt-1">后续可替换为真实照片</p>
-                </div>
+              {/* Time reminder */}
+              <div className="mt-6 border-3 border-black bg-black p-4 text-lime shadow-brutal-sm">
+                <p className="text-[10px] font-black uppercase tracking-widest text-lime/60">Expected Registration</p>
+                <p className="mt-1 text-2xl font-black text-lime">2026年9月初至中旬</p>
+                <p className="mt-2 text-xs font-bold leading-relaxed text-white/60">具体报到时间以录取通知书和学校官方通知为准，建议提前关注学院消息。</p>
               </div>
             </div>
 
