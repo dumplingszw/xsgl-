@@ -15,6 +15,7 @@ function App() {
         <CategoryGrid />
         <RecommendedArticles />
         <CampusShowcase />
+        <JoinUsSection />
       </main>
       <Footer />
       <XiaokePet />

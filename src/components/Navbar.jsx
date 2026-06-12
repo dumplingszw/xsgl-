@@ -8,6 +8,7 @@ const navLinks = [
   { label: '推荐攻略', href: '#articles' },
   { label: '新生工具箱', href: '#freshman-guide' },
   { label: '校园风光', href: '#campus' },
+  { label: '加入我们', href: '#join-us' },
 ]
 
 const Navbar = () => {
