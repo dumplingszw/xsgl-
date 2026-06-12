@@ -1,3 +1,5 @@
+import { assetPath } from '../utils/assetPath'
+
 const Footer = () => {
   return (
     <footer className="bg-black border-t-3 border-black">
@@ -23,7 +25,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/logo.png"
+                src={assetPath('/logo.png')}
                 alt="工科生初心汇"
                 className="h-8 w-auto object-contain"
               />

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
+import { assetPath } from '../utils/assetPath'
 
 const categories = [
   {
@@ -275,21 +276,21 @@ const colorStyles = {
 
 const categoryPhotos = {
   life: [
-    { src: '/campus-doc/canteen-1.jpg', title: '食堂照片 1', desc: '来自食堂介绍文档的原始照片，用于辅助了解餐厅环境。' },
-    { src: '/campus-doc/canteen-2.jpg', title: '食堂照片 2', desc: '来自食堂介绍文档的原始照片，用于辅助了解餐厅档口和就餐空间。' },
-    { src: '/campus-doc/dorm-1.png', title: '宿舍照片 1', desc: '来自宿舍介绍文档的原始照片，用于辅助了解宿舍相关空间。' },
-    { src: '/campus-doc/dorm-2.png', title: '宿舍照片 2', desc: '来自宿舍介绍文档的原始照片，用于辅助了解住宿条件。' },
+    { src: assetPath('/campus-doc/canteen-1.jpg'), title: '食堂照片 1', desc: '来自食堂介绍文档的原始照片，用于辅助了解餐厅环境。' },
+    { src: assetPath('/campus-doc/canteen-2.jpg'), title: '食堂照片 2', desc: '来自食堂介绍文档的原始照片，用于辅助了解餐厅档口和就餐空间。' },
+    { src: assetPath('/campus-doc/dorm-1.png'), title: '宿舍照片 1', desc: '来自宿舍介绍文档的原始照片，用于辅助了解宿舍相关空间。' },
+    { src: assetPath('/campus-doc/dorm-2.png'), title: '宿舍照片 2', desc: '来自宿舍介绍文档的原始照片，用于辅助了解住宿条件。' },
   ],
   facility: [
-    { src: '/campus-doc/sports-1.jpg', title: '体育场馆照片 1', desc: '来自体育馆介绍文档的原始照片，用于辅助了解运动空间。' },
-    { src: '/campus-doc/sports-2.jpg', title: '体育场馆照片 2', desc: '来自体育馆介绍文档的原始照片，用于辅助了解操场和体育设施。' },
-    { src: '/campus-doc/sports-3.png', title: '体育场馆照片 3', desc: '来自体育馆介绍文档的原始照片，用于辅助了解校园运动环境。' },
-    { src: '/campus-doc/campus-4.jpg', title: '校园环境照片 1', desc: '来自校园环境文档的原始照片，用于辅助了解校园公共空间。' },
+    { src: assetPath('/campus-doc/sports-1.jpg'), title: '体育场馆照片 1', desc: '来自体育馆介绍文档的原始照片，用于辅助了解运动空间。' },
+    { src: assetPath('/campus-doc/sports-2.jpg'), title: '体育场馆照片 2', desc: '来自体育馆介绍文档的原始照片，用于辅助了解操场和体育设施。' },
+    { src: assetPath('/campus-doc/sports-3.png'), title: '体育场馆照片 3', desc: '来自体育馆介绍文档的原始照片，用于辅助了解校园运动环境。' },
+    { src: assetPath('/campus-doc/campus-4.jpg'), title: '校园环境照片 1', desc: '来自校园环境文档的原始照片，用于辅助了解校园公共空间。' },
   ],
   traffic: [
-    { src: '/campus-doc/campus-5.jpg', title: '校园环境照片 2', desc: '来自校园环境文档的原始照片，用于辅助熟悉校门和校园动线。' },
-    { src: '/campus-doc/nearby-1.png', title: '周边生活照片 1', desc: '来自周边生活文档的原始图片，用于辅助了解校外配套。' },
-    { src: '/campus-doc/nearby-2.png', title: '周边生活照片 2', desc: '来自周边生活文档的原始图片，用于辅助了解周边吃喝玩乐。' },
+    { src: assetPath('/campus-doc/campus-5.jpg'), title: '校园环境照片 2', desc: '来自校园环境文档的原始照片，用于辅助熟悉校门和校园动线。' },
+    { src: assetPath('/campus-doc/nearby-1.png'), title: '周边生活照片 1', desc: '来自周边生活文档的原始图片，用于辅助了解校外配套。' },
+    { src: assetPath('/campus-doc/nearby-2.png'), title: '周边生活照片 2', desc: '来自周边生活文档的原始图片，用于辅助了解周边吃喝玩乐。' },
   ],
 }
 

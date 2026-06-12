@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { assetPath } from '../utils/assetPath'
 
-const ASSET_BASE = '/xiaoke-pet'
+const ASSET_BASE = assetPath('/xiaoke-pet')
 
 const petAssets = {
   idle: `${ASSET_BASE}/idle.png`,

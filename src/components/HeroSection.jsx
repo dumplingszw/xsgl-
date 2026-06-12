@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { assetPath } from '../utils/assetPath'
 
 const HeroSection = () => {
   return (
@@ -27,7 +28,7 @@ const HeroSection = () => {
             >
               <div className="flex items-center justify-center rounded-xl bg-white/20 backdrop-blur-[8px] p-2">
                 <img
-                  src="/logo.png"
+                  src={assetPath('/logo.png')}
                   alt="工科生初心汇"
                   className="h-12 md:h-14 w-auto object-contain"
                 />

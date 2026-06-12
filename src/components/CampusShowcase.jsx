@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
+import { assetPath } from '../utils/assetPath'
 
 const makePhotos = (prefix, count, ext, groupTitle, desc) =>
   Array.from({ length: count }, (_, index) => ({
-    src: `/campus-doc/${prefix}-${index + 1}.${ext}`,
+    src: assetPath(`/campus-doc/${prefix}-${index + 1}.${ext}`),
     title: `${groupTitle}照片 ${index + 1}`,
     desc,
   }))
@@ -15,7 +16,7 @@ const galleryGroups = [
     title: '食堂餐厅',
     icon: '🍽️',
     summary: '来自文档“食堂介绍”的原始照片，展示学校餐厅环境、档口和就餐空间。学校主要有麦道餐厅、德韵轩餐厅、和园餐厅、雅园餐厅。',
-    cover: '/campus-doc/canteen-1.jpg',
+    cover: assetPath('/campus-doc/canteen-1.jpg'),
     photos: makePhotos('canteen', 4, 'jpg', '食堂餐厅', '食堂餐厅相关原始照片，用于辅助了解学校就餐环境。'),
   },
   {
@@ -23,7 +24,7 @@ const galleryGroups = [
     title: '学生宿舍',
     icon: '🏡',
     summary: '来自文档“宿舍介绍”的原始照片，展示宿舍楼、宿舍内部或宿舍相关生活空间。宿舍多为六人间、上床下桌。',
-    cover: '/campus-doc/dorm-1.png',
+    cover: assetPath('/campus-doc/dorm-1.png'),
     photos: makePhotos('dorm', 5, 'png', '学生宿舍', '学生宿舍相关原始照片，用于辅助了解住宿条件和生活空间。'),
   },
   {
@@ -31,17 +32,17 @@ const galleryGroups = [
     title: '体育馆与操场',
     icon: '🏟️',
     summary: '来自文档“体育馆介绍”的原始照片，展示体育馆、操场、篮球场和运动设施等内容。',
-    cover: '/campus-doc/sports-1.jpg',
+    cover: assetPath('/campus-doc/sports-1.jpg'),
     photos: [
       ...makePhotos('sports', 2, 'jpg', '体育场馆', '体育馆与操场相关原始照片，用于辅助了解学校运动空间。'),
       ...makePhotos('sports', 2, 'png', '体育场馆', '体育馆与操场相关原始照片，用于辅助了解学校运动空间。').map((photo, index) => ({
         ...photo,
-        src: `/campus-doc/sports-${index + 3}.png`,
+        src: assetPath(`/campus-doc/sports-${index + 3}.png`),
         title: `体育场馆照片 ${index + 3}`,
       })),
       ...makePhotos('sports', 2, 'jpg', '体育场馆', '体育馆与操场相关原始照片，用于辅助了解学校运动空间。').map((photo, index) => ({
         ...photo,
-        src: `/campus-doc/sports-${index + 5}.jpg`,
+        src: assetPath(`/campus-doc/sports-${index + 5}.jpg`),
         title: `体育场馆照片 ${index + 5}`,
       })),
     ],
@@ -51,7 +52,7 @@ const galleryGroups = [
     title: '校园环境',
     icon: '🏛️',
     summary: '来自文档“校园地图/校园环境”的原始照片，统一按编号展示，避免把具体地点名称标错。',
-    cover: '/campus-doc/campus-1.jpg',
+    cover: assetPath('/campus-doc/campus-1.jpg'),
     photos: makePhotos('campus', 7, 'jpg', '校园环境', '校园环境相关原始照片，用于辅助新生熟悉校园空间和日常动线。'),
   },
   {
@@ -59,7 +60,7 @@ const galleryGroups = [
     title: '周边生活',
     icon: '🛍️',
     summary: '来自文档“校园吃喝玩乐集”的原始图片，展示学校周边商业、餐饮和休闲生活信息。',
-    cover: '/campus-doc/nearby-1.png',
+    cover: assetPath('/campus-doc/nearby-1.png'),
     photos: makePhotos('nearby', 2, 'png', '周边生活', '周边生活相关原始图片，用于辅助了解校外生活配套。'),
   },
 ]
@@ -69,7 +70,7 @@ const dayScenes = [
     time: '07:20',
     title: '从宿舍开始一天',
     groupId: 'dorm',
-    image: '/campus-doc/dorm-1.png',
+    image: assetPath('/campus-doc/dorm-1.png'),
     desc: '宿舍多为六人间、上床下桌。早上整理好书包，从宿舍区出发，先熟悉楼门开放时间、公共水房和洗衣区位置。',
     tip: '建议：入学第一周先记住宿舍楼、浴室、水房和快递点的位置。',
   },
@@ -77,7 +78,7 @@ const dayScenes = [
     time: '12:00',
     title: '去食堂吃饭',
     groupId: 'canteen',
-    image: '/campus-doc/canteen-1.jpg',
+    image: assetPath('/campus-doc/canteen-1.jpg'),
     desc: '麦道、德韵轩、和园、雅园等餐厅覆盖早餐、正餐和夜宵。新生可以先从离宿舍最近的餐厅开始熟悉。',
     tip: '建议：高峰期错峰就餐，先收藏常去窗口。',
   },
@@ -85,7 +86,7 @@ const dayScenes = [
     time: '14:10',
     title: '上课与校园动线',
     groupId: 'campus',
-    image: '/campus-doc/campus-1.jpg',
+    image: assetPath('/campus-doc/campus-1.jpg'),
     desc: '下午课程开始前，重点熟悉宿舍、教学楼、图书馆、食堂、校门之间的路线，减少开学初迷路。',
     tip: '建议：第一周提前 10 分钟出门，边走边记路。',
   },
@@ -93,7 +94,7 @@ const dayScenes = [
     time: '17:50',
     title: '操场与体育馆',
     groupId: 'sports',
-    image: '/campus-doc/sports-1.jpg',
+    image: assetPath('/campus-doc/sports-1.jpg'),
     desc: '课余可以去操场、体育馆和球场活动。体育馆、东操场、西操场都是校园生活里很常见的活动空间。',
     tip: '建议：军训、运动会和体育课相关集合地点要提前确认。',
   },
@@ -101,7 +102,7 @@ const dayScenes = [
     time: '周末',
     title: '周边补给与放松',
     groupId: 'nearby',
-    image: '/campus-doc/nearby-1.png',
+    image: assetPath('/campus-doc/nearby-1.png'),
     desc: '周末可以熟悉学校周边商圈、餐饮、便利店和交通站点。外出时注意结伴、安全和返校时间。',
     tip: '建议：第一次外出先从常用校门和公交/打车点开始。',
   },
@@ -214,7 +215,7 @@ const CampusShowcase = () => {
           transition={{ duration: 0.6, delay: 0.25 }}
         >
           <div className="relative min-h-[360px] overflow-hidden border-3 border-black bg-black shadow-brutal">
-            <img src="/campus-doc/campus-1.jpg" alt="校园探索底图" className="absolute inset-0 h-full w-full object-cover opacity-55" />
+            <img src={assetPath('/campus-doc/campus-1.jpg')} alt="校园探索底图" className="absolute inset-0 h-full w-full object-cover opacity-55" />
             <div className="absolute inset-0 bg-gradient-to-br from-black/55 via-black/20 to-black/70" />
             <div className="relative z-10 p-5">
               <span className="inline-block border-3 border-black bg-lime px-3 py-1 text-xs font-black text-black shadow-brutal-sm">

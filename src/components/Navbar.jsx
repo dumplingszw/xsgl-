@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { assetPath } from '../utils/assetPath'
 
 const navLinks = [
   { label: '首页', href: '#hero' },
@@ -36,7 +37,7 @@ const Navbar = () => {
           <a href="#hero" className="flex items-center gap-3 group">
             <div className="flex items-center justify-center rounded-lg bg-white/20 backdrop-blur-[8px] p-1.5">
               <img
-                src="/logo.png"
+                src={assetPath('/logo.png')}
                 alt="工科生初心汇"
                 className="h-8 md:h-10 w-auto object-contain"
               />
