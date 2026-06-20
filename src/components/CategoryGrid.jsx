@@ -95,8 +95,8 @@ const categories = [
   {
     id: 'study',
     title: '学习资源',
-    description: '图书馆、学院机构、选课、绩点综测、学生证补办',
-    count: 21,
+    description: '图书馆、学院机构、学院专业、选课、绩点综测、学生证补办',
+    count: 125,
     icon: '📚',
     color: 'lime',
     sections: [
@@ -285,6 +285,28 @@ const categoryPhotos = {
   ],
 }
 
+const collegeMajors = [
+  { college: '建筑设计学院', undergraduate: ['建筑设计', '建筑装饰工程', '古建筑工程', '文物修复与保护'], junior: ['建筑装饰工程技术', '石窟寺保护技术'] },
+  { college: '建筑工程学院', undergraduate: ['建筑工程', '智能建造工程', '城市地下工程'], junior: ['建筑工程技术', '建筑钢结构工程技术', '岩土工程技术', '地下与隧道工程技术'] },
+  { college: '设备工程学院', undergraduate: ['建筑环境与能源工程', '建筑电气与智能化工程', '机器人技术'], junior: ['建筑电气工程技术', '供热通风与空调工程技术', '工业设备安装工程技术', '工业机器人技术'] },
+  { college: '工程管理学院', undergraduate: ['工程造价', '建设工程管理'], junior: ['工程造价', '建设工程监理', '现代物业管理', '房地产经营与管理', '土木工程检测技术'] },
+  { college: '交通工程学院', undergraduate: ['道路与桥梁工程', '测绘工程技术', '市政工程'], junior: ['道路与桥梁工程技术', '工程测量技术', '市政工程技术', '铁道桥梁隧道工程技术', '城市轨道交通工程技术', '道路养护与管理'] },
+  { college: '汽车工程学院', undergraduate: ['汽车服务工程技术', '新能源汽车工程技术'], junior: ['新能源汽车检测与维修技术', '汽车制造与试验技术', '汽车检测与维修技术'] },
+  { college: '信息工程学院', undergraduate: ['电子信息工程技术', '软件工程技术', '物联网工程技术'], junior: ['软件技术', '电子信息工程技术', '物联网应用技术', '信息安全技术应用'] },
+  { college: '计算机工程学院', undergraduate: ['计算机应用工程', '智能交通管理', '大数据工程技术', '数字媒体技术'], junior: ['计算机应用技术', '大数据技术', '数字媒体技术', '人工智能技术应用'] },
+  { college: '智能制造学院', undergraduate: ['电梯工程技术', '装备智能化技术'], junior: ['机械制造及自动化', '电梯工程技术', '智能装备制造技术'] },
+  { college: '安全与应急管理学院', undergraduate: ['安全工程技术'], junior: ['安全技术与管理', '消防救援技术'] },
+  { college: '会计学院', undergraduate: ['大数据与会计', '大数据与审计'], junior: ['大数据与会计', '大数据与审计', '会计信息管理'] },
+  { college: '经济学院', undergraduate: ['国际经济与贸易', '金融科技应用', '财税大数据应用'], junior: ['国际经济与贸易', '金融服务与管理', '财税大数据应用'] },
+  { college: '现代物流学院', undergraduate: ['物流工程技术', '现代物流管理', '电子商务'], junior: ['现代物流管理', '电子商务', '供应链运营管理'] },
+  { college: '管理学院', undergraduate: ['人力资源管理', '企业数字化管理'], junior: ['人力资源管理', '工商企业管理', '行政管理'] },
+  { college: '文法学院', undergraduate: ['法律', '旅游规划与设计'], junior: ['网络新闻与传播'] },
+  { college: '艺术设计学院', undergraduate: ['视觉传达设计', '环境艺术设计'], junior: ['视觉传达设计', '环境艺术设计', '数字媒体艺术设计'] },
+  { college: '音乐舞蹈学院', undergraduate: ['音乐表演', '舞蹈表演与编导'], junior: ['音乐表演', '舞蹈表演', '歌舞表演'] },
+  { college: '外国语学院', undergraduate: ['应用英语'], junior: ['应用英语', '商务英语'] },
+  { college: '体育学院', undergraduate: ['社会体育指导与管理'], junior: ['社会体育', '休闲体育'] },
+]
+
 const CategoryGrid = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
   const [selectedCategory, setSelectedCategory] = useState(null)
@@ -439,6 +461,51 @@ const CategoryGrid = () => {
                     </section>
                   ))}
                 </div>
+
+                {selectedCategory.id === 'study' && (
+                  <section className="mt-5 border-3 border-black bg-white p-5 shadow-brutal-sm md:p-6">
+                    <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                      <div>
+                        <h4 className="text-xl font-black text-black md:text-2xl">学院及专业一览（2025）</h4>
+                        <p className="mt-2 text-sm font-bold leading-relaxed text-black/55">
+                          根据上传表格整理，覆盖19个学院、45个本科专业、60个专科专业，方便新生按学院快速查看专业分布。
+                        </p>
+                      </div>
+                      <span className="inline-flex w-fit border-3 border-black bg-lime px-3 py-2 text-xs font-black text-black shadow-brutal-sm">
+                        本科 / 专科
+                      </span>
+                    </div>
+                    <div className="grid max-h-[520px] grid-cols-1 gap-4 overflow-y-auto pr-1 lg:grid-cols-2">
+                      {collegeMajors.map((item) => (
+                        <article key={item.college} className="border-3 border-black bg-off-white p-4">
+                          <h5 className="mb-3 text-base font-black text-black">{item.college}</h5>
+                          <div className="space-y-3">
+                            <div>
+                              <p className="mb-2 inline-block border-2 border-black bg-blue-accent px-2 py-0.5 text-[10px] font-black text-white">本科</p>
+                              <div className="flex flex-wrap gap-1.5">
+                                {item.undergraduate.map((major) => (
+                                  <span key={major} className="border border-black bg-white px-2 py-1 text-xs font-bold text-black/70">
+                                    {major}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                            <div>
+                              <p className="mb-2 inline-block border-2 border-black bg-lime px-2 py-0.5 text-[10px] font-black text-black">专科</p>
+                              <div className="flex flex-wrap gap-1.5">
+                                {item.junior.map((major) => (
+                                  <span key={major} className="border border-black bg-white px-2 py-1 text-xs font-bold text-black/70">
+                                    {major}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                )}
               </div>
             </motion.article>
           </motion.div>

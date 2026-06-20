@@ -128,9 +128,6 @@ const RecommendedArticles = () => {
                 <p className={`text-sm leading-relaxed ${article.featured ? 'text-black/60' : 'text-gray-500'}`}>
                   {article.description}
                 </p>
-                {article.image && (
-                  <img src={article.image} alt={`${article.title}配图`} className="mt-4 h-40 w-full border-3 border-black object-cover" />
-                )}
                 <div className="mt-4 flex items-center gap-2">
                   <span className="text-xs font-bold text-blue-accent group-hover:underline">
                     点开详情
@@ -180,9 +177,6 @@ const RecommendedArticles = () => {
                 </button>
               </header>
               <div className="overflow-y-auto p-5 md:p-6">
-                {selectedArticle.image && (
-                  <img src={selectedArticle.image} alt={`${selectedArticle.title}原始配图`} className="mb-5 max-h-[360px] w-full border-3 border-black object-cover" />
-                )}
                 <ul className="space-y-3">
                   {selectedArticle.details.map((item) => (
                     <li key={item} className="flex gap-3 text-sm font-bold leading-relaxed text-black/70">

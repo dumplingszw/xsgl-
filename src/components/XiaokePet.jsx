@@ -37,6 +37,9 @@ const stateItems = [
   { key: 'sleep', icon: '🌙', label: '睡觉' },
 ]
 
+const getPetSize = () => (window.innerWidth < 640 ? 96 : 128)
+const isTouchLikeDevice = () => window.matchMedia('(hover: none), (pointer: coarse)').matches
+
 const XiaokePet = () => {
   const [state, setState] = useState('idle')
   const [bubbleIndex, setBubbleIndex] = useState(0)
@@ -51,17 +54,21 @@ const XiaokePet = () => {
         return { x: 24, y: 120 }
       }
     }
-    return { x: 24, y: 120 }
+    return { x: window.innerWidth < 640 ? Math.max(16, window.innerWidth - 112) : 24, y: window.innerWidth < 640 ? Math.max(96, window.innerHeight - 156) : 120 }
   })
   const draggingRef = useRef(false)
+  const movedRef = useRef(false)
   const dragOffsetRef = useRef({ x: 0, y: 0 })
+  const dragStartRef = useRef({ x: 0, y: 0 })
   const currentBubble = useMemo(() => bubbles[bubbleIndex % bubbles.length], [bubbleIndex])
 
   useEffect(() => {
     const keepInsideViewport = () => {
+      const petSize = getPetSize()
+      const margin = window.innerWidth < 640 ? 8 : 0
       setPosition((pos) => ({
-        x: Math.min(Math.max(0, pos.x), window.innerWidth - 128),
-        y: Math.min(Math.max(0, pos.y), window.innerHeight - 128),
+        x: Math.min(Math.max(margin, pos.x), window.innerWidth - petSize - margin),
+        y: Math.min(Math.max(margin, pos.y), window.innerHeight - petSize - margin),
       }))
     }
     keepInsideViewport()
@@ -89,47 +96,60 @@ const XiaokePet = () => {
   }, [menuOpen])
 
   useEffect(() => {
-    const handleMove = (event) => {
+    const clampPosition = (x, y) => {
+      const petSize = getPetSize()
+      const margin = window.innerWidth < 640 ? 8 : 0
+      return {
+        x: Math.min(Math.max(margin, x), window.innerWidth - petSize - margin),
+        y: Math.min(Math.max(margin, y), window.innerHeight - petSize - margin),
+      }
+    }
+
+    const handlePointerMove = (event) => {
       if (!draggingRef.current) return
       const nextX = event.clientX - dragOffsetRef.current.x
       const nextY = event.clientY - dragOffsetRef.current.y
-      setPosition({
-        x: Math.min(Math.max(0, nextX), window.innerWidth - 128),
-        y: Math.min(Math.max(0, nextY), window.innerHeight - 128),
-      })
+      const movedX = Math.abs(event.clientX - dragStartRef.current.x)
+      const movedY = Math.abs(event.clientY - dragStartRef.current.y)
+      if (movedX > 6 || movedY > 6) {
+        movedRef.current = true
+        setMenuOpen(false)
+      }
+      setPosition(clampPosition(nextX, nextY))
     }
 
-    const handleUp = () => {
+    const handlePointerUp = () => {
       if (!draggingRef.current) return
       draggingRef.current = false
       setState('idle')
       setPosition((pos) => {
-        const next = {
-          x: Math.min(Math.max(0, pos.x), window.innerWidth - 128),
-          y: Math.min(Math.max(0, pos.y), window.innerHeight - 128),
-        }
+        const next = clampPosition(pos.x, pos.y)
         window.localStorage.setItem('xiaoke-position', JSON.stringify(next))
         return next
       })
     }
 
-    window.addEventListener('mousemove', handleMove)
-    window.addEventListener('mouseup', handleUp)
+    window.addEventListener('pointermove', handlePointerMove)
+    window.addEventListener('pointerup', handlePointerUp)
+    window.addEventListener('pointercancel', handlePointerUp)
     return () => {
-      window.removeEventListener('mousemove', handleMove)
-      window.removeEventListener('mouseup', handleUp)
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerup', handlePointerUp)
+      window.removeEventListener('pointercancel', handlePointerUp)
     }
   }, [])
 
-  const handleMouseDown = (event) => {
-    if (event.button !== 0) return
+  const handlePointerDown = (event) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return
     draggingRef.current = true
+    movedRef.current = false
+    dragStartRef.current = { x: event.clientX, y: event.clientY }
     dragOffsetRef.current = {
       x: event.clientX - position.x,
       y: event.clientY - position.y,
     }
+    event.currentTarget.setPointerCapture?.(event.pointerId)
     setState('busy')
-    setMenuOpen(false)
   }
 
   const handleContextMenu = (event) => {
@@ -140,10 +160,16 @@ const XiaokePet = () => {
   }
 
   const handlePetClick = () => {
-    if (draggingRef.current) return
+    if (draggingRef.current || movedRef.current) return
+    if (isTouchLikeDevice()) {
+      setMenuOpen((value) => !value)
+      setShowBubble(false)
+      setBubbleIndex((index) => index + 1)
+    } else {
+      setShowBubble(true)
+      setBubbleIndex((index) => index + 1)
+    }
     setState('happy')
-    setShowBubble(true)
-    setBubbleIndex((index) => index + 1)
     window.setTimeout(() => setState('idle'), 1800)
   }
 
@@ -175,7 +201,7 @@ const XiaokePet = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.92 }}
             transition={{ duration: 0.28, ease: 'easeOut' }}
-            className="absolute bottom-[118px] left-1/2 w-[280px] -translate-x-1/2 rounded-[14px] border-[1.5px] border-[#FFD4DC] bg-white/95 px-4 py-3 text-sm font-medium leading-relaxed text-[#4A4A4A] shadow-[0_12px_30px_rgba(0,0,0,0.12)] backdrop-blur-md after:absolute after:left-1/2 after:top-full after:h-0 after:w-0 after:-translate-x-1/2 after:border-x-[10px] after:border-t-[12px] after:border-x-transparent after:border-t-white/95"
+            className="absolute bottom-[92px] left-1/2 w-[220px] -translate-x-1/2 rounded-[14px] border-[1.5px] border-[#FFD4DC] bg-white/95 px-3 py-2 text-xs font-medium leading-relaxed text-[#4A4A4A] shadow-[0_12px_30px_rgba(0,0,0,0.12)] backdrop-blur-md after:absolute after:left-1/2 after:top-full after:h-0 after:w-0 after:-translate-x-1/2 after:border-x-[10px] after:border-t-[12px] after:border-x-transparent after:border-t-white/95 sm:bottom-[118px] sm:w-[280px] sm:px-4 sm:py-3 sm:text-sm"
           >
             {currentBubble}
           </motion.div>
@@ -189,7 +215,7 @@ const XiaokePet = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.9 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="absolute bottom-[110px] right-0 w-[210px] rounded-[14px] border-[1.5px] border-[#FFD4DC] bg-white/95 p-2 shadow-[0_14px_34px_rgba(0,0,0,0.16)] backdrop-blur-md"
+            className="absolute bottom-[88px] right-0 w-[min(210px,calc(100vw-24px))] rounded-[14px] border-[1.5px] border-[#FFD4DC] bg-white/95 p-2 shadow-[0_14px_34px_rgba(0,0,0,0.16)] backdrop-blur-md sm:bottom-[110px] sm:w-[210px]"
           >
             <div className="px-3 py-2">
               <p className="text-[11px] font-bold tracking-widest text-[#FF8095]">小科菜单</p>
@@ -238,9 +264,9 @@ const XiaokePet = () => {
 
       <motion.button
         type="button"
-        onMouseDown={handleMouseDown}
+        onPointerDown={handlePointerDown}
         onClick={handlePetClick}
-        className="relative flex h-[128px] w-[128px] cursor-grab items-center justify-center rounded-full bg-transparent active:cursor-grabbing"
+        className="relative flex h-24 w-24 touch-none cursor-grab items-center justify-center rounded-full bg-transparent active:cursor-grabbing sm:h-[128px] sm:w-[128px]"
         animate={{
           y: state === 'sleep' ? 8 : [0, -6, 0],
           rotate: state === 'thinking' ? [0, -3, 3, 0] : 0,
@@ -254,7 +280,7 @@ const XiaokePet = () => {
           src={petAssets[state] || petAssets.idle}
           alt="小科校园助手"
           draggable="false"
-          className="h-[128px] w-[128px] object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.22)]"
+          className="h-24 w-24 object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.22)] sm:h-[128px] sm:w-[128px]"
         />
         <span className="absolute -right-1 bottom-2 rounded-full border-2 border-black bg-lime px-2 py-0.5 text-[10px] font-black text-black shadow-brutal-sm">
           小科
