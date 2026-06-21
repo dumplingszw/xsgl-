@@ -140,7 +140,7 @@ const CampusShowcase = () => {
   }
 
   return (
-    <section id="campus" ref={ref} className="relative overflow-hidden bg-lime py-20 md:py-28">
+    <section id="campus" ref={ref} className="relative overflow-hidden bg-lime py-20 md:py-28 scroll-mt-24">
       <div className="absolute inset-0 opacity-[0.04]">
         <div
           className="absolute inset-0"

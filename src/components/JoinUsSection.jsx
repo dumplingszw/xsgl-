@@ -6,7 +6,7 @@ const JoinUsSection = () => {
   const { ref, inView } = useInView({ threshold: 0.12, triggerOnce: true })
 
   return (
-    <section id="join-us" ref={ref} className="relative overflow-hidden bg-off-white py-20 md:py-28">
+    <section id="join-us" ref={ref} className="relative overflow-hidden bg-off-white py-20 md:py-28 scroll-mt-24">
       <div className="absolute inset-0 opacity-[0.05]">
         <div
           className="absolute inset-0"
@@ -32,7 +32,7 @@ const JoinUsSection = () => {
           </div>
           <h2 className="text-3xl font-black tracking-tight text-black md:text-4xl lg:text-5xl">加入我们</h2>
           <p className="mt-3 max-w-2xl text-base font-bold leading-relaxed text-black/50">
-            想参与新生攻略制作、校园内容整理、活动运营或同学互助？欢迎加入工科生初心汇，一起把这份指南做得更好。
+            想参与新生攻略制作、校园内容整理、活动运营或同学互助？欢迎加入工科大初心汇，一起把这份指南做得更好。
           </p>
         </motion.div>
 
@@ -74,12 +74,12 @@ const JoinUsSection = () => {
               </span>
               <h3 className="mt-4 text-2xl font-black text-black">扫码加入/咨询</h3>
               <p className="mt-2 max-w-sm text-sm font-bold leading-relaxed text-black/55">
-                用微信扫描二维码，了解工科生初心汇招新、活动和新生服务相关信息。
+                用微信扫描二维码，了解工科大初心汇招新、活动和新生服务相关信息。
               </p>
               <div className="mt-6 w-full max-w-[360px] border-3 border-black bg-white p-4 shadow-brutal">
                 <img
                   src={assetPath('/join-us-qr.jpg')}
-                  alt="加入工科生初心汇二维码"
+                  alt="加入工科大初心汇二维码"
                   className="mx-auto aspect-square w-full object-contain"
                 />
               </div>

@@ -24,7 +24,7 @@ const FullGuideIndex = () => {
   const { ref, inView } = useInView({ threshold: 0.08, triggerOnce: true })
 
   return (
-    <section ref={ref} className="bg-black py-20 md:py-28">
+    <section id="guide-index" ref={ref} className="bg-black py-20 md:py-28 scroll-mt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           className="mb-12"

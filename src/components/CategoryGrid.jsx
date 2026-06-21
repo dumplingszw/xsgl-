@@ -331,7 +331,7 @@ const CategoryGrid = () => {
   }
 
   return (
-    <section id="categories" ref={ref} className="relative bg-off-white py-20 md:py-28">
+    <section id="categories" ref={ref} className="relative bg-off-white py-20 md:py-28 scroll-mt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           className="mb-12 md:mb-16"

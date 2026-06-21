@@ -1,177 +1,129 @@
-import { motion } from 'framer-motion'
 import { assetPath } from '../utils/assetPath'
+import { guideSections } from '../data/guideSections'
+
+const heroActions = [
+  { label: '新生必读', href: '#mustread', primary: true },
+  { label: '校园生活', href: '#campus-life' },
+  { label: '学习资源', href: '#study' },
+  { label: '加入我们', href: '#join-us' },
+]
+
+const featureCards = guideSections.slice(1, 4)
 
 const HeroSection = () => {
   return (
-    <section id="hero" className="relative min-h-screen overflow-hidden bg-lime">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-[0.06]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `repeating-linear-gradient(0deg, #000 0px, #000 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, #000 0px, #000 1px, transparent 1px, transparent 40px)`,
-        }} />
+    <section id="hero" className="relative overflow-hidden bg-off-white pt-24 scroll-mt-24">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.05]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+          }}
+        />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-          {/* Left: Text Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-          >
-            {/* Logo + Badge */}
-            <motion.div
-              className="flex items-center gap-4 mb-6"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="flex items-center justify-center rounded-xl bg-white/20 backdrop-blur-[8px] p-2">
-                <img
-                  src={assetPath('/logo.png')}
-                  alt="工科生初心汇"
-                  className="h-12 md:h-14 w-auto object-contain"
-                />
-              </div>
-              <span className="brutal-card bg-black text-lime px-4 py-2 text-xs font-black uppercase tracking-widest">
-                2026 新生开学指南
-              </span>
-            </motion.div>
-
-            {/* Main Heading */}
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-black leading-[1.1] tracking-tight">
-              山西工程科技
-              <br />
-              <span className="relative">
-                职业大学
-                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
-                  <path d="M2 8 Q75 2 150 8 T298 6" stroke="#217DD1" strokeWidth="4" strokeLinecap="round" />
-                </svg>
-              </span>
-            </h1>
-
-            {/* Subtitle */}
-            <motion.p
-              className="mt-6 text-lg md:text-xl font-bold text-black/70 max-w-lg leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              欢迎来到山西工程科技职业大学，这里是由工科大初心汇制作的2026新生攻略。
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              className="mt-8 flex flex-wrap gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <a href="#categories" className="brutal-card brutal-card-hover bg-black text-lime px-6 py-3.5 text-sm font-black uppercase tracking-wider inline-flex items-center gap-2">
-                <span>立即开始</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-              <a href="#campus" className="brutal-card brutal-card-hover bg-white text-black px-6 py-3.5 text-sm font-black uppercase tracking-wider inline-flex items-center gap-2">
-                <span>校园风光</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
-                </svg>
-              </a>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              className="mt-12 flex gap-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            >
-              {[
-                { value: '6', label: '攻略模块' },
-                { value: '21+', label: '篇攻略' },
-                { value: '2026', label: '新生届' },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-3xl md:text-4xl font-black text-black">{stat.value}</div>
-                  <div className="text-xs font-bold text-black/50 uppercase tracking-wider mt-1">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Right: Visual Card Stack */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-          >
-            {/* Main card */}
-            <div className="brutal-card bg-white p-6 md:p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-lime border-3 border-black flex items-center justify-center text-xl">
-                  🎓
-                </div>
-                <div>
-                  <h3 className="text-lg font-black text-black">新生入学必读</h3>
-                  <p className="text-xs font-bold text-gray-500">6大核心模块全覆盖</p>
-                </div>
-              </div>
-
-              {/* Freshman preparation card */}
-              <div className="space-y-3">
-                {[
-                  { step: '01', title: '报到前', text: '整理录取通知书、身份证、档案、照片和常用生活用品。' },
-                  { step: '02', title: '到校当天', text: '跟随志愿者引导，完成学院报到、资格初审和注册审核。' },
-                  { step: '03', title: '入住之后', text: '先熟悉宿舍楼、食堂、浴室、快递点和教学楼位置。' },
-                ].map((item) => (
-                  <div key={item.step} className="grid grid-cols-[52px_1fr] gap-3 border-3 border-black bg-off-white p-3 shadow-brutal-sm">
-                    <div className="flex h-12 w-12 items-center justify-center border-3 border-black bg-lime text-sm font-black text-black">
-                      {item.step}
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-black text-black">{item.title}</h4>
-                      <p className="mt-1 text-xs font-bold leading-relaxed text-black/55">{item.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Time reminder */}
-              <div className="mt-6 border-3 border-black bg-black p-4 text-lime shadow-brutal-sm">
-                <p className="text-[10px] font-black uppercase tracking-widest text-lime/60">Expected Registration</p>
-                <p className="mt-1 text-2xl font-black text-lime">2026年9月初至中旬</p>
-                <p className="mt-2 text-xs font-bold leading-relaxed text-white/60">具体报到时间以录取通知书和学校官方通知为准，建议提前关注学院消息。</p>
-              </div>
+      <div className="relative mx-auto max-w-[1152px] px-6 pb-12 pt-10 md:px-10 md:pb-16 md:pt-16 lg:px-12">
+        <div className="flex flex-col items-center gap-12 lg:min-h-[430px] lg:flex-row lg:items-center lg:justify-between">
+          <div className="w-full max-w-2xl lg:w-[58%]">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border-3 border-black bg-lime px-4 py-2 text-xs font-black uppercase tracking-[0.18em] shadow-brutal-sm">
+              2026 新生开学指南
             </div>
 
-            {/* Floating accent card */}
-            <motion.div
-              className="absolute -bottom-6 -right-4 md:-bottom-8 md:-right-8 brutal-card bg-blue-accent text-white px-5 py-3 z-10"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            <h1 className="text-4xl font-black leading-[1.08] tracking-tight text-black md:text-6xl lg:text-7xl">
+              写给正在了解
+              <br />
+              <span className="relative inline-block">
+                山西工程科技职业大学
+                <span className="absolute -bottom-2 left-0 h-3 w-full rounded-full bg-blue-accent/30" />
+              </span>
+              <br />
+              的你
+            </h1>
+
+            <p className="mt-6 max-w-xl text-xl font-black leading-relaxed text-black md:text-2xl">
+              历经了数年寒窗苦读，即将踏入大学校园的你，我相信你也会对大学校园的一切充满好奇吧。
+            </p>
+            <p className="mt-3 max-w-xl text-base font-bold leading-8 text-black/58 md:text-lg">
+              这是一份由我们工科大初心汇整理的关于山西工程科技职业大学的介绍，我们希望为你减少一些信息差，让你大学生活更加多姿多彩！
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              {heroActions.map((action) => (
+                <a
+                  key={action.href}
+                  href={action.href}
+                  className={`rounded-md border-3 border-black px-5 py-3 text-sm font-black shadow-brutal-sm transition-all hover:-translate-y-0.5 hover:shadow-brutal ${
+                    action.primary ? 'bg-black text-lime' : 'bg-white text-black hover:bg-lime'
+                  }`}
+                >
+                  {action.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative flex w-full justify-center lg:w-[36%]">
+            <div className="absolute -left-4 top-8 hidden h-24 w-24 rounded-full bg-lime blur-2xl lg:block" />
+            <div className="absolute -right-3 bottom-4 hidden h-20 w-20 rounded-full bg-blue-accent/40 blur-2xl lg:block" />
+            <div className="relative w-full max-w-[320px] rounded-[28px] border-3 border-black bg-white p-8 shadow-brutal-lg">
+              <div className="mx-auto flex h-36 w-36 items-center justify-center rounded-3xl border-3 border-black bg-lime shadow-brutal-sm">
+                <img src={assetPath('/logo.png')} alt="工科大初心汇 Logo" className="h-24 w-24 object-contain" />
+              </div>
+              <div className="mt-7 border-t-3 border-black pt-5">
+                <p className="text-[11px] font-black uppercase tracking-[0.22em] text-blue-accent">Freshman Guide</p>
+                <h2 className="mt-2 text-2xl font-black text-black">你好，见字如面</h2>
+                <p className="mt-3 text-sm font-bold leading-7 text-black/55">
+                  我是工科大的一名在校大学生。2024年，机缘巧合之下，我来到了山西工程科技职业大学，在这短短的两年内，我认识了许多形形色色的人，经历了许多事情，正因如此我很理解大家初来大学时的焦虑不安，所以，我做了这份"工科大新生必看指南"。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="guide-index" className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+          {featureCards.map((card) => (
+            <a
+              key={card.id}
+              href={`#${card.id}`}
+              className="group rounded-xl border-3 border-black bg-white p-6 shadow-brutal-sm transition-all hover:-translate-y-1 hover:bg-lime hover:shadow-brutal"
             >
-              <p className="text-xs font-bold">工科生初心汇制作</p>
-              <p className="text-[10px] text-white/70 mt-0.5">V2.0 Website Edition</p>
-            </motion.div>
-          </motion.div>
+              <span className="text-[11px] font-black uppercase tracking-[0.18em] text-blue-accent group-hover:text-black/50">
+                {card.eyebrow}
+              </span>
+              <h2 className="mt-3 text-xl font-black text-black">{card.label}</h2>
+              <p className="mt-3 text-sm font-bold leading-7 text-black/58">{card.description}</p>
+            </a>
+          ))}
         </div>
       </div>
 
-      {/* Scrolling marquee */}
-      <div className="absolute bottom-0 left-0 right-0 bg-black border-t-3 border-black overflow-hidden">
-        <div className="animate-marquee whitespace-nowrap py-3">
-          {Array(2).fill(null).map((_, i) => (
-            <span key={i} className="inline-block">
-              {['新生必读', '生活指南', '学习资源', '实训设施', '周边服务', '就业发展', '★', '☆'].map((text, j) => (
-                <span key={`${i}-${j}`} className="mx-4 text-sm font-black text-lime">
-                  {text}
-                </span>
-              ))}
-            </span>
-          ))}
+      <div className="relative mx-auto max-w-[1152px] px-6 pb-16 pt-6 md:px-10 md:pb-20 lg:px-12">
+        <div className="rounded-2xl border-3 border-black bg-white p-8 shadow-brutal md:p-10">
+          <div className="mx-auto max-w-3xl">
+            <p className="text-base font-bold leading-8 text-black/70 md:text-lg">
+              我希望这个网站希望尽可能真实、系统地呈现山西工程科技职业大学的信息，包括专业信息以及学习和生活相关内容。我们希望它不只是一个简单的信息汇总，更希望让它成为大家的好帮手。
+            </p>
+            <p className="mt-5 text-base font-bold leading-8 text-black/70 md:text-lg">
+              希望你能通过这里，看到一个更真实、更具体的山西工程科技职业大学。
+            </p>
+            <p className="mt-5 text-base font-bold leading-8 text-black/70 md:text-lg">
+              如果这个网站对你有帮助，欢迎推荐给更多需要的人。
+            </p>
+            <p className="mt-5 text-base font-bold leading-8 text-black/70 md:text-lg">
+              如果有更多问题，欢迎加入群聊或者加我们团队的微信来咨询讨论。
+            </p>
+          </div>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 md:flex-row">
+            <div className="flex h-48 w-48 items-center justify-center rounded-xl border-3 border-dashed border-black/30 bg-off-white">
+              <span className="text-sm font-black text-black/40">（二维码占位）</span>
+            </div>
+            <div className="flex h-48 w-48 items-center justify-center rounded-xl border-3 border-dashed border-black/30 bg-off-white">
+              <span className="text-sm font-black text-black/40">（二维码占位）</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

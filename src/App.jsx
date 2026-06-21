@@ -1,22 +1,35 @@
+import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
-import HeroSection from './components/HeroSection'
-import CategoryGrid from './components/CategoryGrid'
-import RecommendedArticles from './components/RecommendedArticles'
-import CampusShowcase from './components/CampusShowcase'
-import JoinUsSection from './components/JoinUsSection'
+import HomePage from './components/HomePage'
+import DocPage from './components/DocPage'
 import Footer from './components/Footer'
 import XiaokePet from './components/XiaokePet'
 
 function App() {
+  const [currentPath, setCurrentPath] = useState('')
+
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '')
+    setCurrentPath(hash)
+
+    const onHashChange = () => {
+      const newHash = window.location.hash.replace('#', '')
+      setCurrentPath(newHash)
+    }
+
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
   return (
-    <div className="relative min-h-screen bg-off-white font-sans">
+    <div className="relative min-h-screen bg-off-white font-sans text-black">
       <Navbar />
       <main>
-        <HeroSection />
-        <CategoryGrid />
-        <RecommendedArticles />
-        <CampusShowcase />
-        <JoinUsSection />
+        {currentPath === '' || currentPath === '/' ? (
+          <HomePage />
+        ) : (
+          <DocPage path={currentPath} />
+        )}
       </main>
       <Footer />
       <XiaokePet />

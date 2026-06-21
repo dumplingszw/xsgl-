@@ -78,7 +78,7 @@ const RecommendedArticles = () => {
   const closeArticle = () => setSelectedArticle(null)
 
   return (
-    <section id="articles" ref={ref} className="relative bg-black py-20 md:py-28">
+    <section id="articles" ref={ref} className="relative bg-black py-20 md:py-28 scroll-mt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           className="mb-12 md:mb-16"

@@ -37,7 +37,7 @@ const FreshmanGuideSections = () => {
   const { ref, inView } = useInView({ threshold: 0.08, triggerOnce: true })
 
   return (
-    <section id="freshman-guide" ref={ref} className="bg-off-white py-20 md:py-28">
+    <section id="freshman-guide" ref={ref} className="bg-off-white py-20 md:py-28 scroll-mt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           className="mb-12"

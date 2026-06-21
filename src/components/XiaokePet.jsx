@@ -14,7 +14,7 @@ const petAssets = {
 
 const bubbles = [
   '你好呀，我是小科，工科大的新生校园助手。',
-  '点我右键菜单，可以快速打开新生攻略。',
+  '点我可以快速打开攻略导航哦。',
   '报到材料建议提前放进一个文件袋哦。',
   '军训记得准备防晒、运动鞋、水杯和软鞋垫。',
   '不知道先看什么？从新生必读开始最稳。',
@@ -22,11 +22,12 @@ const bubbles = [
 ]
 
 const menuItems = [
-  { key: 'guide', icon: '📋', label: '新生攻略', href: '#categories', state: 'happy' },
-  { key: 'life', icon: '🏠', label: '生活指南', href: '#categories', state: 'busy' },
-  { key: 'articles', icon: '⭐', label: '推荐攻略', href: '#articles', state: 'thinking' },
-  { key: 'campus', icon: '📸', label: '校园风光', href: '#campus', state: 'happy' },
-  { key: 'top', icon: '🏫', label: '回到首页', href: '#hero', state: 'idle' },
+  { key: 'guide', icon: '📋', label: '新生必读', href: '#mustread', state: 'happy' },
+  { key: 'life', icon: '🏠', label: '校园生活', href: '#campus-life', state: 'busy' },
+  { key: 'study', icon: '📚', label: '学习资源', href: '#study', state: 'thinking' },
+  { key: 'campus', icon: '📸', label: '校园风光', href: '#day-in-life', state: 'happy' },
+  { key: 'transport', icon: '🚌', label: '周边交通', href: '#transport', state: 'busy' },
+  { key: 'top', icon: '🏫', label: '回到首页', href: '#', state: 'idle' },
 ]
 
 const stateItems = [
@@ -37,7 +38,7 @@ const stateItems = [
   { key: 'sleep', icon: '🌙', label: '睡觉' },
 ]
 
-const getPetSize = () => (window.innerWidth < 640 ? 96 : 128)
+const getPetSize = () => (window.innerWidth < 640 ? 72 : 128)
 const isTouchLikeDevice = () => window.matchMedia('(hover: none), (pointer: coarse)').matches
 
 const XiaokePet = () => {
@@ -176,14 +177,7 @@ const XiaokePet = () => {
   const handleMenuAction = (item) => {
     setState(item.state)
     setMenuOpen(false)
-    const target = document.querySelector(item.href)
-    if (target) {
-      window.history.replaceState(null, '', item.href)
-      const y = target.getBoundingClientRect().top + window.scrollY - 88
-      window.scrollTo({ top: y, behavior: 'smooth' })
-    } else {
-      window.location.hash = item.href
-    }
+    window.location.hash = item.href
     window.setTimeout(() => setState('idle'), 1800)
   }
 
@@ -201,7 +195,7 @@ const XiaokePet = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.92 }}
             transition={{ duration: 0.28, ease: 'easeOut' }}
-            className="absolute bottom-[92px] left-1/2 w-[220px] -translate-x-1/2 rounded-[14px] border-[1.5px] border-[#FFD4DC] bg-white/95 px-3 py-2 text-xs font-medium leading-relaxed text-[#4A4A4A] shadow-[0_12px_30px_rgba(0,0,0,0.12)] backdrop-blur-md after:absolute after:left-1/2 after:top-full after:h-0 after:w-0 after:-translate-x-1/2 after:border-x-[10px] after:border-t-[12px] after:border-x-transparent after:border-t-white/95 sm:bottom-[118px] sm:w-[280px] sm:px-4 sm:py-3 sm:text-sm"
+            className="absolute bottom-[68px] left-1/2 w-[200px] -translate-x-1/2 rounded-[14px] border-[1.5px] border-[#FFD4DC] bg-white/95 px-3 py-2 text-xs font-medium leading-relaxed text-[#4A4A4A] shadow-[0_12px_30px_rgba(0,0,0,0.12)] backdrop-blur-md after:absolute after:left-1/2 after:top-full after:h-0 after:w-0 after:-translate-x-1/2 after:border-x-[10px] after:border-t-[12px] after:border-x-transparent after:border-t-white/95 sm:bottom-[118px] sm:w-[280px] sm:px-4 sm:py-3 sm:text-sm"
           >
             {currentBubble}
           </motion.div>
@@ -215,7 +209,7 @@ const XiaokePet = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.9 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="absolute bottom-[88px] right-0 w-[min(210px,calc(100vw-24px))] rounded-[14px] border-[1.5px] border-[#FFD4DC] bg-white/95 p-2 shadow-[0_14px_34px_rgba(0,0,0,0.16)] backdrop-blur-md sm:bottom-[110px] sm:w-[210px]"
+            className="absolute bottom-[66px] right-0 w-[min(200px,calc(100vw-24px))] rounded-[14px] border-[1.5px] border-[#FFD4DC] bg-white/95 p-2 shadow-[0_14px_34px_rgba(0,0,0,0.16)] backdrop-blur-md sm:bottom-[110px] sm:w-[210px]"
           >
             <div className="px-3 py-2">
               <p className="text-[11px] font-bold tracking-widest text-[#FF8095]">小科菜单</p>
@@ -266,7 +260,7 @@ const XiaokePet = () => {
         type="button"
         onPointerDown={handlePointerDown}
         onClick={handlePetClick}
-        className="relative flex h-24 w-24 touch-none cursor-grab items-center justify-center rounded-full bg-transparent active:cursor-grabbing sm:h-[128px] sm:w-[128px]"
+        className="relative flex h-[72px] w-[72px] touch-none cursor-grab items-center justify-center rounded-full bg-transparent active:cursor-grabbing sm:h-[128px] sm:w-[128px]"
         animate={{
           y: state === 'sleep' ? 8 : [0, -6, 0],
           rotate: state === 'thinking' ? [0, -3, 3, 0] : 0,
@@ -280,9 +274,9 @@ const XiaokePet = () => {
           src={petAssets[state] || petAssets.idle}
           alt="小科校园助手"
           draggable="false"
-          className="h-24 w-24 object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.22)] sm:h-[128px] sm:w-[128px]"
+          className="h-[72px] w-[72px] object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.22)] sm:h-[128px] sm:w-[128px]"
         />
-        <span className="absolute -right-1 bottom-2 rounded-full border-2 border-black bg-lime px-2 py-0.5 text-[10px] font-black text-black shadow-brutal-sm">
+        <span className="absolute -right-0.5 bottom-1 rounded-full border-2 border-black bg-lime px-1.5 py-0 text-[9px] font-black text-black shadow-brutal-sm sm:-right-1 sm:bottom-2 sm:px-2 sm:py-0.5 sm:text-[10px]">
           小科
         </span>
       </motion.button>

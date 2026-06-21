@@ -1,89 +1,34 @@
 import { assetPath } from '../utils/assetPath'
+import { guideNavigation } from '../data/guideSections'
 
 const Footer = () => {
   return (
-    <footer className="bg-black border-t-3 border-black">
-      {/* CTA Banner */}
-      <div className="bg-lime border-b-3 border-black">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12 md:py-16">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-black text-black">准备好开始你的大学生活了吗？</h3>
-              <p className="mt-2 text-sm font-bold text-black/60">收藏这份指南，随时查阅你需要的信息</p>
+    <footer className="border-t-3 border-black bg-off-white">
+      <div className="mx-auto max-w-[1152px] px-5 py-8 md:px-10 md:py-10 lg:px-12">
+        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-8">
+          <div className="max-w-md">
+            <div className="flex items-center gap-2">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-black bg-lime shadow-brutal-sm">
+                <img src={assetPath('/logo.png')} alt="" className="h-5 w-5 object-contain" />
+              </span>
+              <span className="text-base font-black text-black">工科大初心汇</span>
             </div>
-            <a href="#hero" className="brutal-card brutal-card-hover bg-black text-lime px-8 py-3.5 text-sm font-black uppercase tracking-wider whitespace-nowrap">
-              回到顶部 ↑
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <img
-                src={assetPath('/logo.png')}
-                alt="工科生初心汇"
-                className="h-8 w-auto object-contain"
-              />
-              <div>
-                <p className="text-sm font-black text-lime">工科生初心汇</p>
-                <p className="text-[10px] font-bold text-white/40">山西工程科技职业大学</p>
-              </div>
-            </div>
-            <p className="text-sm text-white/40 leading-relaxed max-w-md">
-              2026级新生开学全景指南，由工科生初心汇团队制作。涵盖新生必读、生活指南、学习资源、校园设施、周边交通、资助发展六大模块。
+            <p className="mt-2 text-xs font-bold leading-6 text-black/50 md:mt-3 md:text-sm md:leading-7">
+              由工科大初心汇团队整理，致力于为新生提供真实、实用的校园信息。
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-xs font-black text-lime uppercase tracking-widest mb-4">攻略分类</h4>
-            <ul className="space-y-2">
-              {['新生必读', '生活指南', '学习资源', '校园设施', '周边交通', '资助发展'].map((link) => (
-                <li key={link}>
-                  <a href="#categories" className="text-sm text-white/50 hover:text-lime transition-colors font-medium">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Info */}
-          <div>
-            <h4 className="text-xs font-black text-lime uppercase tracking-widest mb-4">相关信息</h4>
-            <ul className="space-y-3">
-              {[
-                { label: '学校名称', value: '山西工程科技职业大学' },
-                { label: '学校位置', value: '山西省晋中市' },
-                { label: '项目版本', value: 'V2.0 Website' },
-                { label: '制作团队', value: '工科生初心汇' },
-              ].map((item) => (
-                <li key={item.label}>
-                  <p className="text-[10px] font-bold text-white/30 uppercase tracking-wider">{item.label}</p>
-                  <p className="text-sm text-white/60 font-medium mt-0.5">{item.value}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30">
-            © 2026 山西工程科技职业大学 · 工科生初心汇 · 新生指南
-          </p>
-          <div className="flex items-center gap-4">
-            {['首页', '分类', '校园', '关于'].map((link) => (
-              <a key={link} href="#hero" className="text-xs text-white/30 hover:text-lime transition-colors font-medium">
-                {link}
+          <div className="grid grid-cols-3 gap-x-6 gap-y-2 text-xs font-black text-black/55 sm:grid-cols-5 md:text-sm">
+            {guideNavigation.slice(1).map((link) => (
+              <a key={link.href} href={link.href} className="transition-colors hover:text-black">
+                {link.label}
               </a>
             ))}
           </div>
+        </div>
+
+        <div className="mt-8 border-t border-black/10 pt-4 text-center text-[11px] font-bold text-black/35 md:mt-10 md:pt-6 md:text-left md:text-xs">
+          © 2026 山西工程科技职业大学 · 工科大初心汇
         </div>
       </div>
     </footer>
