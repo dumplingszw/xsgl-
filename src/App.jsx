@@ -9,11 +9,11 @@ function App() {
   const [currentPath, setCurrentPath] = useState('')
 
   useEffect(() => {
-    const hash = window.location.hash.replace('#', '')
+    const hash = window.location.hash.replace('#', '').split('?')[0]
     setCurrentPath(hash)
 
     const onHashChange = () => {
-      const newHash = window.location.hash.replace('#', '')
+      const newHash = window.location.hash.replace('#', '').split('?')[0]
       setCurrentPath(newHash)
     }
 
