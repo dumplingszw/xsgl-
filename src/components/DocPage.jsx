@@ -18,6 +18,7 @@ const forewordContent = {
         '如果这个网站对你有帮助，欢迎推荐给更多需要的人。',
         '如果有更多问题，欢迎加入群聊或者加我们团队的微信来咨询讨论。',
       ],
+      images: ['/qrcode-wechat.jpg', '/qrcode-wechat-2.jpg'],
     },
   ],
 }
